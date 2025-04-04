@@ -1,0 +1,79 @@
+local start_place={}
+local start_block_positions={}
+local start_place_clone={1,1,1}
+local chunk,position_chunk={{1,1,1}},{{1,1,1}}
+local color_i,color_i2,color_i3=1,26,190
+local brick_pallete={{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i}}
+color_i,color_i2,color_i3=1-0.4,1+0.4,1-0.4
+local brick_x={{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i},
+	{color_i,color_i2,color_i3,color_i2,color_i}}
+local function drawitems(x,y,z,a,b,c,n,m)
+	local t = Instance.new("Part")
+	t.Parent=game.Workspace
+	t.Name="Protected"..game.Players.LocalPlayer.Name
+	t.Size=	Vector3.new(x,y,z)
+	t.Position=Vector3.new(a,b,c)
+	t.Anchored=true
+	t.BrickColor=BrickColor.new(brick_pallete[n][m])
+end
+for i=1,15 do
+	chunk,position_chunk={{1,1,1}},{{1,1,1}}
+	for j=1,5 do
+	table.insert(chunk,table.maxn(chunk),start_place_clone)	
+	table.insert(position_chunk,{14+j,4,15+i})
+
+	end
+	table.remove(chunk,1)
+	table.remove(position_chunk,1)
+	table.insert(start_place,chunk)
+	table.insert(start_block_positions,position_chunk)
+end
+table.remove(start_place,1)
+table.remove(start_block_positions,1)
+for i=1,table.maxn(start_place) do
+	for j=1,table.maxn(start_place[1]) do
+		for k=1,1 do
+			
+			drawitems(brick_x[i][j],start_place[i][j][2],start_place[i][j][3],start_block_positions[i][j][1],start_block_positions[i][j][2],start_block_positions[i][j][3],i,j)
+		end
+	end
+end
+if script.Parent.Name=="Cursor" then
+	
+	while game.Players.LocalPlayer.PlayerGui.Forum.Frame.Visible==true do
+		wait()
+		if game.Players.LocalPlayer.PlayerGui.Forum.Frame:FindFirstChild("Cursor")~=nil then
+			game.Players.LocalPlayer.PlayerGui.Forum.Frame:FindFirstChild("Cursor").Visible=false
+			wait(0.5)
+			game.Players.LocalPlayer.PlayerGui.Forum.Frame:FindFirstChild("Cursor").Visible=true
+			wait(0.5)
+		end
+	end
+end
