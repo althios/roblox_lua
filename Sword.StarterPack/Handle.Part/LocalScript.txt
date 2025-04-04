@@ -1,0 +1,7 @@
+local mouse=game.Players.LocalPlayer:GetMouse()
+mouse.Button1Down:Connect(function()
+	local a = script.Parent.Parent.Grip
+	 script.Parent.Parent.Grip=CFrame.new(0,-1,0)*CFrame.Angles(math.pi/4,0,0)
+	wait(0.5)
+	 script.Parent.Parent.Grip=a
+end)
