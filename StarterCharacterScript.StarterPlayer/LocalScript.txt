@@ -1,0 +1,27 @@
+local user_data
+game.Workspace.RemoteEvent.OnClientEvent:Connect(function(user_json)
+	user_data=user_json
+	if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum")~=nil then
+		local text=""
+		for i=1,table.maxn(game:GetService("HttpService"):JSONDecode(user_data)) do
+			text=text..game:GetService("HttpService"):JSONDecode(user_data)[i].." "
+		end
+		
+		if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum")~=nil then
+			local s=Instance.new("ImageLabel")
+			s.Size=UDim2.new(0,16,0,16)
+			s.Position=UDim2.new(game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.Position.X.Scale,-8,game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.Position.Y.Scale,0)
+			s.Name="Cursor"
+			s.Image="http://www.roblox.com/asset/?id=16820513075"
+			s.Parent=game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame
+			s.ZIndex=2
+			s.BackgroundTransparency=1
+			s.BorderSizePixel=0
+			game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.visible_cursor:Clone().Parent=s
+			game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.TextXAlignment=Enum.TextXAlignment.Left
+			game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.Text=text
+			game.Players.LocalPlayer.PlayerGui:FindFirstChild("Forum").Frame.AI.TextYAlignment=Enum.TextYAlignment.Top
+
+		end
+		end	
+end)
