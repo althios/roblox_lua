@@ -1,0 +1,21 @@
+local det=0
+script.Parent.Touched:Connect(function(hit)
+	local a =hit
+	if game.Players:FindFirstChild(a.Parent.Name) then
+		if game.Workspace:FindFirstChild(a.Parent.Name) then
+			local hum = a.Parent:FindFirstChild("Humanoid")
+			if hum and (a.Position-game.Workspace.SpawnLocation.Position).Magnitude>game.Workspace.SpawnLocation.Size.Magnitude then
+				if det==0 then
+					hum:TakeDamage(10)
+					det=2
+				end
+				
+				if det==2 then
+					wait(0.5)
+					det=0
+				end
+				
+			end
+		end
+	end
+end)
